@@ -1,0 +1,37 @@
+package config
+
+import (
+	"blogPlatform/models"
+	"fmt"
+	"log"
+	"os"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
+
+var DB *gorm.DB
+
+func ConnectDB() {
+	dsn := fmt.Sprintf("host=%v user=%v password=%v dbname=%v port=%v sslmode=disable",
+		os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_DBNAME"), os.Getenv("DB_PORT"))
+
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		log.Fatal("Failed to connect to database: ", err)
+	}
+	DB = db
+
+	err = DB.AutoMigrate(
+		&models.Tag{},
+		&models.Author{},
+		&models.Post{},
+		&models.Comment{},
+	)
+	if err != nil {
+		log.Fatal("Migration failed: ", err)
+	}
+
+	log.Println("Connected successfully!")
+}
