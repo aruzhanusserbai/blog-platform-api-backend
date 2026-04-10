@@ -7,7 +7,8 @@ type Post struct {
 	Title     string    `json:"title"`
 	Content   string    `json:"content"`
 	CreatedAt time.Time `json:"created_at"`
-	Comments  []Comment `gorm:"foreignKey:PostID;constraint:OnDelete:CASCADE;"`
-	AuthorID  uint      `json:"author_id"`
-	Tags      []Tag     `gorm:"many2many:post_tags;"`
+	Comments  []Comment `gorm:"foreignKey:PostID;constraint:OnDelete:CASCADE;" json:"comments,omitempty"`
+	AuthorID  uint      `json:"-"`
+	Author    Author    `gorm:"foreignKey:AuthorID" json:"author,omitempty"`
+	Tags      []Tag     `gorm:"many2many:post_tags;" json:"tags,omitempty"`
 }

@@ -16,18 +16,20 @@ func CreatePost(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
+	post.AuthorID = c.GetUint("user_id")
+
 	if err := config.DB.Create(&post).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Post is not created"})
 		return
 	}
-
+	config.DB.Preload("Author").First(&post, post.ID)
 	c.JSON(http.StatusCreated, post)
 }
 
 func GetPosts(c *gin.Context) {
 	var posts []models.Post
 
-	if err := config.DB.Preload("Tags").Preload("Comments").Find(&posts).Error; err != nil {
+	if err := config.DB.Preload("Tags").Preload("Comments").Preload("Author").Find(&posts).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Can't fetch the data"})
 		return
 	}
@@ -43,7 +45,7 @@ func GetPost(c *gin.Context) {
 	}
 
 	var post models.Post
-	if err := config.DB.Preload("Tags").Preload("Comments").First(&post, id).Error; err != nil {
+	if err := config.DB.Preload("Tags").Preload("Comments").Preload("Author").First(&post, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
 		return
 	}
@@ -56,6 +58,12 @@ func UpdatePost(c *gin.Context) {
 
 	if err := config.DB.First(&post, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
+		return
+	}
+
+	userID := c.GetUint("user_id")
+	if userID != post.AuthorID {
+		c.JSON(http.StatusForbidden, gin.H{"error": "Not your post"})
 		return
 	}
 
@@ -75,7 +83,7 @@ func UpdatePost(c *gin.Context) {
 	}
 
 	if err := config.DB.Save(&post).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"err": "Failed to update post"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update post"})
 		return
 	}
 	c.JSON(http.StatusOK, post)
@@ -90,8 +98,14 @@ func DeletePost(c *gin.Context) {
 		return
 	}
 
+	userID := c.GetUint("user_id")
+	if userID != post.AuthorID {
+		c.JSON(http.StatusForbidden, gin.H{"error": "Not your post"})
+		return
+	}
+
 	if err := config.DB.Delete(&post).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"err": "Post not deleted"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Post not deleted"})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "Post deleted"})

@@ -11,13 +11,18 @@ import (
 
 func AddCommentToPost(c *gin.Context) {
 	var comment models.Comment
-	postID, _ := strconv.Atoi(c.Param("id"))
+	postID, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
+		return
+	}
 
 	if err := c.ShouldBindJSON(&comment); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
 	comment.PostID = uint(postID)
+	comment.AuthorID = c.GetUint("user_id")
 
 	if err := config.DB.Create(&comment).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create comment"})
@@ -51,6 +56,12 @@ func UpdateComment(c *gin.Context) {
 		return
 	}
 
+	userID := c.GetUint("user_id")
+	if userID != comment.AuthorID {
+		c.JSON(http.StatusForbidden, gin.H{"error": "Not your comment"})
+		return
+	}
+
 	var input struct {
 		Content *string `json:"content"`
 	}
@@ -75,6 +86,12 @@ func DeleteComment(c *gin.Context) {
 
 	if err := config.DB.First(&comment, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Comment not found"})
+		return
+	}
+
+	userID := c.GetUint("user_id")
+	if userID != comment.AuthorID {
+		c.JSON(http.StatusForbidden, gin.H{"error": "Not your comment"})
 		return
 	}
 

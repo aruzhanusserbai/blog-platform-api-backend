@@ -28,7 +28,7 @@ func AddTagsToPost(c *gin.Context) {
 	}
 
 	if err := config.DB.First(&post, postID).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Post not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "Post not found"})
 		return
 	}
 
@@ -68,8 +68,8 @@ func CreateTags(c *gin.Context) {
 		return
 	}
 	if err := config.DB.Create(&tag).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"err": "Tag not created"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Tag not created"})
 		return
 	}
-	c.JSON(201, tag)
+	c.JSON(http.StatusCreated, tag)
 }
