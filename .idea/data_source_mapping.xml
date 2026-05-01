@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/migrations/000001_create_authors_table.down.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000001_create_authors_table.up.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000002_create_tags_table.down.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000002_create_tags_table.up.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000003_create_posts_table.down.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000003_create_posts_table.up.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000004_create_comments_table.down.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000004_create_comments_table.up.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000005_create_post_tags_table.down.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000005_create_post_tags_table.up.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000006_seed_tags.down.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+    <file url="file://$PROJECT_DIR$/migrations/000006_seed_tags.up.sql" value="7d8f5bf7-1b1d-43e7-9eac-ce3a8bed609f" />
+  </component>
+</project>
