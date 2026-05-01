@@ -1,15 +1,14 @@
 package main
 
 import (
-	"blogPlatform/notification-service/config"
-	"blogPlatform/notification-service/middleware"
-	"blogPlatform/notification-service/migrations"
-	"blogPlatform/notification-service/models"
 	"log"
 	"net/http"
+	"notification-service/config"
+	"notification-service/middleware"
+	"notification-service/migrations"
+	"notification-service/models"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 type NotifyRequest struct {
@@ -21,7 +20,6 @@ type NotifyRequest struct {
 }
 
 func main() {
-	godotenv.Load("notification-service/.env")
 	config.ConnectDB()
 	migrations.Run()
 
@@ -60,11 +58,11 @@ func main() {
 	protected.Use(middleware.AuthMiddleware())
 	{
 		protected.GET("/notifications", func(c *gin.Context) {
-			userID := c.GetUint("user_id") // берём из JWT
+			userID := c.GetUint("user_id")
 
 			var notifications []models.Notification
 			if err := config.DB.
-				Where("author_id = ?", userID). // ← фильтруем по юзеру
+				Where("author_id = ?", userID).
 				Order("created_at desc").
 				Find(&notifications).Error; err != nil {
 				c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to fetch"})

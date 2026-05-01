@@ -1,9 +1,9 @@
 package migrations
 
 import (
-	"blogPlatform/notification-service/config"
-	"blogPlatform/notification-service/models"
 	"log"
+	"notification-service/config"
+	"notification-service/models"
 )
 
 func Run() {

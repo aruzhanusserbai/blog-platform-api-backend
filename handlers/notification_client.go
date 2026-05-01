@@ -14,7 +14,7 @@ type NotifyPayload struct {
 	CommenterName string `json:"commenter_name"`
 }
 
-var notifyClient = resty.New().SetBaseURL("http://localhost:8081")
+var notifyClient = resty.New().SetBaseURL("http://notification:8081")
 
 func init() {
 	notifyClient.OnBeforeRequest(func(c *resty.Client, req *resty.Request) error {
