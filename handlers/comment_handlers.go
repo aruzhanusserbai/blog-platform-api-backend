@@ -3,7 +3,6 @@ package handlers
 import (
 	"blogPlatform/config"
 	"blogPlatform/models"
-	"blogPlatform/notification-service/handlers"
 	"net/http"
 	"strconv"
 
@@ -34,7 +33,7 @@ func AddCommentToPost(c *gin.Context) {
 	if err := config.DB.Preload("Author").First(&post, postID).Error; err == nil {
 		var commenter models.Author
 		if err := config.DB.First(&commenter, comment.AuthorID).Error; err == nil {
-			go handlers.SendNotification(handlers.NotifyPayload{
+			go SendNotification(NotifyPayload{
 				AuthorID:      post.AuthorID,
 				AuthorEmail:   post.Author.Email,
 				AuthorName:    post.Author.Username,

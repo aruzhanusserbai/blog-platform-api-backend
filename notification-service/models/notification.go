@@ -9,5 +9,6 @@ type Notification struct {
 	AuthorName    string    `json:"author_name"`
 	PostTitle     string    `json:"post_title"`
 	CommenterName string    `json:"commenter_name"`
+	IsRead        bool      `gorm:"default:false" json:"is_read"`
 	CreatedAt     time.Time `json:"created_at"`
 }
