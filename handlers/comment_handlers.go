@@ -48,13 +48,18 @@ func AddCommentToPost(c *gin.Context) {
 
 func GetComments(c *gin.Context) {
 	var comments []models.Comment
+
 	postID, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
 
-	if err := config.DB.Where("post_id = ?", uint(postID)).Find(&comments).Error; err != nil {
+	if err := config.DB.
+		Where("post_id = ?", uint(postID)).
+		Preload("Author").
+		Find(&comments).Error; err != nil {
+
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch data"})
 		return
 	}

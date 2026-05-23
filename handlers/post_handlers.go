@@ -68,24 +68,47 @@ func UpdatePost(c *gin.Context) {
 	}
 
 	var input struct {
-		Title   *string `json:"title"`
-		Content *string `json:"content"`
+		Title   *string  `json:"title"`
+		Content *string  `json:"content"`
+		Tags    []string `json:"tags"`
 	}
+
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
+
 	if input.Title != nil {
 		post.Title = *input.Title
 	}
+
 	if input.Content != nil {
 		post.Content = *input.Content
+	}
+
+	if input.Tags != nil {
+		var tags []models.Tag
+
+		for _, t := range input.Tags {
+			var tag models.Tag
+
+			err := config.DB.Where("name = ?", t).First(&tag).Error
+			if err != nil {
+				tag = models.Tag{Name: t}
+				config.DB.Create(&tag)
+			}
+
+			tags = append(tags, tag)
+		}
+
+		config.DB.Model(&post).Association("Tags").Replace(tags)
 	}
 
 	if err := config.DB.Save(&post).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update post"})
 		return
 	}
+
 	c.JSON(http.StatusOK, post)
 }
 
