@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20f64146-100d-4f22-98dd-0521a25eaaf9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dto/CreatePostDTO.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/handlers/handlers_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/comment_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/comment_handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handlers/notification_client.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/notification_client.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/post_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/post_handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/models/notification.go" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/models/notification.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +22,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="19" />
+    <option name="cachedIndexableFilesCount" value="45" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -40,61 +45,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000002474741843" />
-      <entry key="MS500" value="1.133647294367617" />
-      <entry key="S2" value="4.990850830699896" />
-      <entry key="S5" value="11.898289962180488" />
-      <entry key="S10" value="18.648120038922805" />
-      <entry key="S30" value="27.487566407015755" />
-      <entry key="S60" value="30.841703751013252" />
-      <entry key="M2" value="32.801693128674756" />
-      <entry key="M5" value="34.08912054289603" />
-      <entry key="M10" value="34.53902479679075" />
-      <entry key="M15" value="34.69143147639969" />
-      <entry key="M30" value="34.845084354702884" />
-      <entry key="H1" value="34.92238328458029" />
-      <entry key="H2" value="34.9611517872288" />
-      <entry key="H4" value="34.980565913302115" />
-      <entry key="D1" value="34.99675959798847" />
-      <entry key="W1" value="34.99953705142745" />
+      <entry key="MS100" value="4.944808848296021E-29" />
+      <entry key="MS500" value="2.181875177772153E-6" />
+      <entry key="S2" value="0.03843328225441614" />
+      <entry key="S5" value="0.27157074904298806" />
+      <entry key="S10" value="0.5211245043585919" />
+      <entry key="S30" value="0.8047243912584114" />
+      <entry key="S60" value="0.8970643183509266" />
+      <entry key="M2" value="0.9471348960534068" />
+      <entry key="M5" value="0.986935965201527" />
+      <entry key="M10" value="1.3581521363889568" />
+      <entry key="M15" value="2.3506825352832674" />
+      <entry key="M30" value="8.317409918457871" />
+      <entry key="H1" value="29.158334262505985" />
+      <entry key="H2" value="67.1659560351751" />
+      <entry key="H4" value="106.86494662934975" />
+      <entry key="D1" value="160.87938456260463" />
+      <entry key="W1" value="172.90129787898618" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="0.0" />
-      <entry key="S60" value="0.0" />
-      <entry key="M2" value="0.0" />
-      <entry key="M5" value="0.0" />
-      <entry key="M10" value="0.0" />
-      <entry key="M15" value="0.0" />
-      <entry key="M30" value="0.0" />
-      <entry key="H1" value="0.0" />
-      <entry key="H2" value="0.0" />
-      <entry key="H4" value="0.0" />
-      <entry key="D1" value="0.0" />
-      <entry key="W1" value="0.0" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.0" />
+      <entry key="M5" value="1.0000000024575992" />
+      <entry key="M10" value="1.0000793510973762" />
+      <entry key="M15" value="1.0028631136718362" />
+      <entry key="M30" value="1.1134816835249668" />
+      <entry key="H1" value="1.7431661736973747" />
+      <entry key="H2" value="2.9211867753458285" />
+      <entry key="H4" value="4.096759581148126" />
+      <entry key="D1" value="5.615756139432897" />
+      <entry key="W1" value="5.943195204675632" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0042452924214626915" />
-      <entry key="MS500" value="0.46764407030776933" />
-      <entry key="S2" value="4.740961506649687" />
-      <entry key="S5" value="11.7809647281834" />
-      <entry key="S10" value="18.576537346620665" />
-      <entry key="S30" value="27.44531959364897" />
-      <entry key="S60" value="30.813740301720458" />
-      <entry key="M2" value="32.785190250156724" />
-      <entry key="M5" value="34.08177001965875" />
-      <entry key="M10" value="34.53521040969939" />
-      <entry key="M15" value="34.68885649076377" />
-      <entry key="M30" value="34.84378053612371" />
-      <entry key="H1" value="34.92172723758701" />
-      <entry key="H2" value="34.96082272219409" />
-      <entry key="H4" value="34.98040111950622" />
-      <entry key="D1" value="34.99673209599102" />
-      <entry key="W1" value="34.99953312167913" />
+      <entry key="MS100" value="6.570099245920326E-29" />
+      <entry key="MS500" value="2.422886803095418E-6" />
+      <entry key="S2" value="0.05733426742252726" />
+      <entry key="S5" value="0.4751709045704942" />
+      <entry key="S10" value="0.9721097707801024" />
+      <entry key="S30" value="1.5715138129217896" />
+      <entry key="S60" value="1.7727188519936883" />
+      <entry key="M2" value="1.8828962599359345" />
+      <entry key="M5" value="1.9607267784510156" />
+      <entry key="M10" value="2.3450365404474725" />
+      <entry key="M15" value="3.344721295285341" />
+      <entry key="M30" value="9.42639680842929" />
+      <entry key="H1" value="30.899037878496763" />
+      <entry key="H2" value="70.08568412667145" />
+      <entry key="H4" value="110.96085024117285" />
+      <entry key="D1" value="166.49496817485797" />
+      <entry key="W1" value="178.84446746881642" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -105,40 +110,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "Go Build.go build blogPlatform.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.GoLinterPluginOnboardingV2": "true",
-    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.go.analysis.ui.options.defaults": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "feature/docker",
-    "go.sdk.automatically.set": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/Acer",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.tabs",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.go build blogPlatform.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginOnboardingV2&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.analysis.ui.options.defaults&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/docker&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Acer&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Go Build.go build blogPlatform">
     <configuration name="go build blog-platform-api-backend/" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="blog-platform-api-backend" />

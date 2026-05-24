@@ -2,27 +2,49 @@ package handlers
 
 import (
 	"blogPlatform/config"
+	dto2 "blogPlatform/dto"
 	"blogPlatform/models"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
 
 func CreatePost(c *gin.Context) {
-	var post models.Post
+	var dto dto2.CreatePostDTO
 
-	if err := c.ShouldBindJSON(&post); err != nil {
+	if err := c.ShouldBindJSON(&dto); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
-	post.AuthorID = c.GetUint("user_id")
+
+	if strings.TrimSpace(dto.Title) == "" || strings.TrimSpace(dto.Content) == "" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Title and content cannot be empty",
+		})
+		return
+	}
+
+	post := models.Post{
+		Title:    dto.Title,
+		Content:  dto.Content,
+		AuthorID: c.GetUint("user_id"),
+	}
 
 	if err := config.DB.Create(&post).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Post is not created"})
 		return
 	}
-	config.DB.Preload("Author").First(&post, post.ID)
+
+	if len(dto.Tags) > 0 {
+		var tags []models.Tag
+		config.DB.Where("name IN ?", dto.Tags).Find(&tags)
+		config.DB.Model(&post).Association("Tags").Replace(&tags)
+	}
+
+	config.DB.Preload("Author").Preload("Tags").First(&post, post.ID)
+
 	c.JSON(http.StatusCreated, post)
 }
 

@@ -12,6 +12,7 @@ type NotifyPayload struct {
 	AuthorName    string `json:"author_name"`
 	PostTitle     string `json:"post_title"`
 	CommenterName string `json:"commenter_name"`
+	CommentText   string `json:"comment_text"`
 }
 
 var notifyClient = resty.New().SetBaseURL("http://notification:8081")

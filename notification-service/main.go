@@ -8,6 +8,7 @@ import (
 	"notification-service/migrations"
 	"notification-service/models"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,6 +18,7 @@ type NotifyRequest struct {
 	AuthorName    string `json:"author_name"`
 	PostTitle     string `json:"post_title"`
 	CommenterName string `json:"commenter_name"`
+	CommentText   string `json:"comment_text"`
 }
 
 func main() {
@@ -24,6 +26,13 @@ func main() {
 	migrations.Run()
 
 	r := gin.Default()
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173"},
+		AllowMethods:     []string{"GET", "POST", "DELETE", "PATCH", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		AllowCredentials: true,
+	}))
 
 	r.POST("/notify", func(c *gin.Context) {
 		var req NotifyRequest
@@ -38,6 +47,7 @@ func main() {
 			AuthorName:    req.AuthorName,
 			PostTitle:     req.PostTitle,
 			CommenterName: req.CommenterName,
+			CommentText:   req.CommentText,
 		}
 
 		if err := config.DB.Create(&notification).Error; err != nil {
@@ -117,6 +127,25 @@ func main() {
 				return
 			}
 			c.JSON(http.StatusOK, gin.H{"message": "notification deleted"})
+		})
+
+		protected.PATCH("/notifications/:id/read", func(c *gin.Context) {
+			userID := c.GetUint("user_id")
+			id := c.Param("id")
+
+			var n models.Notification
+
+			if err := config.DB.
+				Where("id = ? AND author_id = ?", id, userID).
+				First(&n).Error; err != nil {
+				c.JSON(404, gin.H{"error": "not found"})
+				return
+			}
+
+			n.IsRead = true
+			config.DB.Save(&n)
+
+			c.JSON(200, n)
 		})
 
 	}

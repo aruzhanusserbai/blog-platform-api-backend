@@ -39,6 +39,7 @@ func AddCommentToPost(c *gin.Context) {
 				AuthorName:    post.Author.Username,
 				PostTitle:     post.Title,
 				CommenterName: commenter.Username,
+				CommentText:   comment.Content,
 			})
 		}
 	}
